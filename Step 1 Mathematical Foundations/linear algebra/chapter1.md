@@ -34,7 +34,7 @@ $$
 - The **solution set** of a system of equations is the collection of all solutions.
 - **Solving** the system means finding all solutions with formulas involving some number of parameters.
 
-A system of linear equations need not have a solution.In this case:
+A system of linear equations need not have a solution. In this case:
 $$
 \begin{cases}
 \begin{aligned}
