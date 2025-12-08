@@ -63,6 +63,11 @@ The Euclidean plane (xy-plane): $\mathbb{R}^2$<p>
 
 ### 1.2 Row Reduction
 
+### Objectives 目标
+1. Learn to replace a system of linear equations by an augmented(增广的) matrix(矩阵).
+2. Learn how the elimination(消除) method corresonds(对应) to performing row opeaations on an augmented matrix.
+3. Understand when a matrix is in (reduced) row echelon(阶梯) form.
+4. 
 
 ### 1.3 Parametric Form
 
