@@ -36,7 +36,7 @@ $$
 
 A system of linear equations need not have a solution. In this case:
 $$
-\begin{cases}
+\begin{cases}inconsistent
 \begin{aligned}
 x + 2y =3 \\
 x + 2y = -3
@@ -63,11 +63,268 @@ The Euclidean plane (xy-plane): $\mathbb{R}^2$<p>
 
 ### 1.2 Row Reduction
 
-### Objectives 目标
+#### Objectives 目标
 1. Learn to replace a system of linear equations by an augmented(增广的) matrix(矩阵).
 2. Learn how the elimination(消除) method corresonds(对应) to performing row opeaations on an augmented matrix.
 3. Understand when a matrix is in (reduced) row echelon(阶梯) form.
-4. 
+4. Learn which row reduced matrices come from inconsistent(不相容，表示无解) linear systems.
+5. Recipe(方法): the row reduction algorithm.
+6. Vocabulary words(术语): **_row operation,row equivalence(等价),matrix,augmented matix,pivot(主元),(reduced) row echelon(阶梯) form_**.
+
+#### The elimination Method(消元法)
+We will solve systems of linear equations algebraically using the elimination method. In other words, we will combine the equations in various ways to try to eliminate as many variables as possible from each equation. There are three valid operations we can perform on our system of equations:
+
+- **Scaling(缩放):** we can multiply both side of an equation by an nonzero number.
+$$
+\left\{
+\begin{aligned}
+x + 2y + 3z &= 6 \\
+2x - 3y + 2z &= 14 \\
+3x + y - z &= -2
+\end{aligned}
+\right.
+\xrightarrow{\text{multiply 1st by } -3}
+\left\{
+\begin{aligned}
+-3x - 6y - 9z &= -18 \\
+2x - 3y + 2z &= 14 \\
+3x + y - z &= -2
+\end{aligned}
+\right.
+$$
+- **Replacement(替换):** we can add a multiple of one equation to another, replacing the second equation with the result.
+$$
+\left\{
+\begin{aligned}
+x + 2y + 3z &= 6 \\
+2x - 3y + 2z &= 14 \\
+3x + y - z &= -2
+\end{aligned}
+\right.
+\xrightarrow{\text{2nd} = \text{2nd} - 2 \times \text{1st}}
+\left\{
+\begin{aligned}
+x + 2y + 3z &= 6 \\
+- 7y + 7z &= 2 \\
+3x + y - z &= -2
+\end{aligned}
+\right.
+$$
+- **Swap(交换):** we can swap two equations.
+$$
+\left\{
+\begin{aligned}
+x + 2y + 3z &= 6 \\
+2x - 3y + 2z &= 14 \\
+3x + y - z &= -2
+\end{aligned}
+\right.
+\xrightarrow{\text{3rd} \longleftrightarrow \text{1st}}
+\left\{
+\begin{aligned}
+3x + y - z &= -2 \\
+2x - 3y + 2z &= 14 \\
+x + 2y + 3z &= 6
+\end{aligned}
+\right.
+$$
+
+#### Augmented Matix
+
+ Solving equations by elimination requires writing the variables x,y,z and the equals sign = over and over again, merely as placeholders: all that is changing in the equations is the coefficient numbers. We can make our life easier by extracting only the numbers, and putting them in a box:
+
+$$
+\left\{
+\begin{aligned}
+x + 2y + 3z &= 6 \\
+2x - 3y + 2z &= 14 \\
+3x + y - z &= -2
+\end{aligned}
+\right.
+\xrightarrow{\text{becomes}}
+\left(
+\begin{array}{ccc|c}
+1 & 2 & 3 & 6 \\
+2 & -3 & 2 & 14 \\
+3 & 1 & -1 & -2
+\end{array}
+\right).
+$$
+
+This is called an augmented matrix. The word “augmented” refers to the vertical line, which we draw to remind ourselves where the equals sign belongs; a matrix is a grid of numbers without the vertical line.
+
+### Echelon Forms(阶梯式)
+
+> **Definition.** A matrix is in **_row echelon form_** if:
+> 1. All zero rows are at the bottom.
+> 2. The first nonzero entry(元素) of a row is to thr right of the first nonzero entry of the row above.
+> 3. Below the first nonzero entry of a row, all entries are zero.
+
+Here is a picture of a matrix in row echelon form:
+$$
+\left(
+\begin{array}{ccccc}
+\boxed{\star} & \star & \star & \star & \star \\
+0 & \boxed{\star} & \star & \star & \star \\
+0 & 0 & 0 & \boxed{\star} & \star \\
+0 & 0 & 0 & 0 & 0
+\end{array}
+\right)
+\quad
+\begin{aligned}
+\star &= \text{any number} \\
+\boxed{\star} &= \text{any nonzero number}
+\end{aligned}
+$$
+
+> **Definition.** A **_pivot_** is the first nonzero entry of a row of a matrix in row echelon form.
+
+A matrix in row-echelon form is generally easy to solve using back-substitution. For example,
+
+> **Definition.** A matrix is in reduced row echelon form if it is in row echelon form, and in addition:
+> - Each pivot is equal to 1.
+> - Each pivot is the only nonzero entry in its column.
+
+Here is a picture of a matrix in reduced row echelon form:
+$$
+\left(
+\begin{array}{ccccc}
+\boxed{1} & 0 & \star & 0 & \star \\
+0 & \boxed{1} & \star & 0 & \star \\
+0 & 0 & 0 & \boxed{1} & \star \\
+0 & 0 & 0 & 0 & 0
+\end{array}
+\right)
+\quad
+\begin{aligned}
+\star &= \text{any number} \\
+\boxed{1} &= \text{pivot}
+\end{aligned}
+$$
+
+A matrix in reduced row echelon form is in some sense completely solved. For example,
+$$
+\left\{
+\begin{array}{ccc|c}
+1 & 0 & 0 &= 1 \\
+0 & 1 & 0 &= -2 \\
+0 & 0 & 1 &= 3
+\end{array}
+\right.
+\xrightarrow{\text{becomes}}
+\left\{
+\begin{aligned}
+x &= 1 \\
+y &= -2 \\
+z &= 3
+\end{aligned}
+\right.
+$$
+
+#### The Row Reduction Algorithm(行简化算法)
+
+> **Theorem(定理).** Every matrix is row equivalent to one and only one matrix in reduced row echelon form.
+每个矩阵都行等价于一个且仅有一个约化行阶梯形矩阵
+
+We will give an algorithm, called **_row reduction_** or **_Gaussian(高斯) elimination_**, which demonstrates that every matrix is row equivalent to at least one matrix in reduced row echelon form.
+
+> Algorithm(Row Reduction)
+>- Step 1a: Swap the 1st row with a lower one so a leftmost nonzero entry is in the 1st >- row (if necessary).
+>- Step 1b: Scale the 1st row so that its first nonzero entry is equal to 1.
+>- Step 1c: Use row replacement so all entries below this 1 are 0.
+>- Step 2a: Swap the 2nd row with a lower one so that the leftmost nonzero entry is in the 2nd row.
+>- Step 2b: Scale the 2nd row so that its first nonzero entry is equal to 1.
+>- Step 2c: Use row replacement so all entries below this 1 are 0.
+>- Step 3a: Swap the 3rd row with a lower one so that the leftmost nonzero entry is in the 3rd row.
+> - etc.
+>- Last Step: Use row replacement to clear all entries above the pivots, starting with the last pivot.
+
+Here is the row reduction algorithm, summarized in pictures.
+$$
+\begin{array}{ccc}
+\text{\color{blue}Get a 1 here} & \text{\color{blue}Clear down} & \text{\color{blue}Get a 1 here} \\
+\left(\begin{array}{cccc}
+\boxed{\star} & \star & \star & \star \\
+\star & \star & \star & \star \\
+\star & \star & \star & \star \\
+\star & \star & \star & \star
+\end{array}\right)
+&
+\left(\begin{array}{cccc}
+\boxed{1} & \star & \star & \star \\
+\downarrow & \star & \star & \star \\
+\downarrow & \star & \star & \star \\
+\downarrow & \star & \star & \star
+\end{array}\right)
+&
+\left(\begin{array}{cccc}
+1 & \star & \star & \star \\
+0 & \boxed{1} & \star & \star \\
+0 & \star & \star & \star \\
+0 & \star & \star & \star
+\end{array}\right)
+\\ \\
+\text{\color{blue}Clear down} & \text{\color{blue}(maybe these are already zero)} & \text{\color{blue}Get a 1 here} \\
+\left(\begin{array}{cccc}
+1 & \star & \star & \star \\
+0 & \boxed{1} & \star & \star \\
+0 & \downarrow & \star & \star \\
+0 & \downarrow & \star & \star
+\end{array}\right)
+&
+\left(\begin{array}{cccc}
+1 & \star & \star & \star \\
+0 & 1 & \star & \star \\
+0 & 0 & \boxed{0} & \star \\
+0 & 0 & \boxed{0} & \star
+\end{array}\right)
+&
+\left(\begin{array}{cccc}
+1 & \star & \star & \star \\
+0 & 1 & \star & \star \\
+0 & 0 & 0 & \boxed{\star} \\
+0 & 0 & 0 & \star
+\end{array}\right)
+\\ \\
+\text{\color{blue}Clear down} & \text{\color{blue}Matrix is in REF} & \text{\color{blue}Clear up} \\
+\left(\begin{array}{cccc}
+1 & \star & \star & \star \\
+0 & 1 & \star & \star \\
+0 & 0 & 0 & \boxed{1} \\
+0 & 0 & 0 & \downarrow
+\end{array}\right)
+&
+\left(\begin{array}{cccc}
+1 & \star & \star & \star \\
+0 & 1 & \star & \star \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0
+\end{array}\right)
+&
+\left(\begin{array}{cccc}
+1 & \star & \star & \uparrow \\
+0 & 1 & \star & \uparrow \\
+0 & 0 & 0 & \boxed{1} \\
+0 & 0 & 0 & 0
+\end{array}\right)
+\\ \\
+\text{\color{blue}Clear up} & \text{\color{blue}Matrix is in RREF} & \\
+\left(\begin{array}{cccc}
+1 & \uparrow & \star & 0 \\
+0 & \boxed{1} & \star & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0
+\end{array}\right)
+&
+\left(\begin{array}{cccc}
+1 & 0 & \star & 0 \\
+0 & 1 & \star & 0 \\
+0 & 0 & 0 & 1 \\
+0 & 0 & 0 & 0
+\end{array}\right)
+&
+\end{array}
+$$
 
 ### 1.3 Parametric Form
 
