@@ -153,7 +153,7 @@ $$
 
 This is called an augmented matrix. The word “augmented” refers to the vertical line, which we draw to remind ourselves where the equals sign belongs; a matrix is a grid of numbers without the vertical line.
 
-### Echelon Forms(阶梯式)
+#### Echelon Forms(阶梯式)
 
 > **Definition.** A matrix is in **_row echelon form_** if:
 > 1. All zero rows are at the bottom.
@@ -202,7 +202,7 @@ $$
 \end{aligned}
 $$
 
-A matrix in reduced row echelon form is in some sense completely solved. For example,
+A matrix in reduced row echelon form is in some sense completely solved 一个行最简形式的矩阵在某种意义上是已经完全解决了. For example,
 $$
 \left\{
 \begin{array}{ccc|c}
