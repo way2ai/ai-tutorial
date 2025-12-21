@@ -61,7 +61,7 @@ The Euclidean plane (xy-plane): $\mathbb{R}^2$<p>
 3-Space: $\mathbb{R}^3$<p>
 
 
-### 1.2 Row Reduction
+### 1.2 Row Reduction 行简化
 
 #### Objectives 目标
 1. Learn to replace a system of linear equations by an augmented(增广的) matrix(矩阵).
@@ -105,7 +105,7 @@ x + 2y + 3z &= 6 \\
 \left\{
 \begin{aligned}
 x + 2y + 3z &= 6 \\
-- 7y + 7z &= 2 \\
+-7y - 4z &= 2 \\
 3x + y - z &= -2
 \end{aligned}
 \right.
@@ -129,7 +129,7 @@ x + 2y + 3z &= 6
 \right.
 $$
 
-#### Augmented Matix
+#### Augmented Matix 增广矩阵
 
  Solving equations by elimination requires writing the variables x,y,z and the equals sign = over and over again, merely as placeholders: all that is changing in the equations is the coefficient numbers. We can make our life easier by extracting only the numbers, and putting them in a box:
 
@@ -326,5 +326,176 @@ $$
 \end{array}
 $$
 
-### 1.3 Parametric Form
+### 1.3 Parametric Form 参数形式
 
+#### Objectives 目标
+1. Learn to express the solution set of a system of linear equations in parametric form.
+2. Understand the three possibilities for the number of solutions of a system of linear equations.
+3. Recipe 配方：Parametric Form.
+4. Vocabulary word: **_free variable_** 自由变量.
+
+#### Free Variables
+
+**Example**
+$$
+\begin{cases}
+\begin{aligned}
+2x + y + 12z &= 1 \\
+x + 2y + 9z &= -1
+\end{aligned}
+\end{cases}
+$$
+
+We solve it using row reduction:
+\[
+\left(
+\begin{array}{ccc|c}
+2 & 1 & 12 & 1\\
+1 & 2 & 9  & -1
+\end{array}
+\right)
+\ \xrightarrow{R_1 \leftrightarrow R_2}\
+\left(
+\begin{array}{ccc|c}
+1 & 2 & 9  & -1\\
+2 & 1 & 12 & 1
+\end{array}
+\right)
+\]
+
+\[
+\xrightarrow{R_2 = R_2 - 2R_1}\
+\left(
+\begin{array}{ccc|c}
+1 & 2 & 9  & -1\\
+0 & -3 & -6 & 3
+\end{array}
+\right)
+\]
+
+\[
+\xrightarrow{R_2 = R_2 \div (-3)}\
+\left(
+\begin{array}{ccc|c}
+1 & 2 & 9  & -1\\
+0 & 1 & 2  & -1
+\end{array}
+\right)
+\]
+
+\[
+\xrightarrow{R_1 = R_1 - 2R_2}\
+\left(
+\begin{array}{ccc|c}
+1 & 0 & 5 & 1\\
+0 & 1 & 2 & -1
+\end{array}
+\right)
+\]
+
+This row reduced matrix corresponds to 对应于 the linear system：
+$$
+\begin{cases}
+\begin{aligned}
+x + 5z &= 1 \\
+y + 2z &= -1
+\end{aligned}
+\end{cases}
+$$
+
+We rewrite as:
+$$
+\begin{cases}
+\begin{aligned}
+x &= 1 - 5z \\
+y &= -1 - 2z
+\end{aligned}
+\end{cases}
+$$
+
+We have found all solutions: it is the set of all values x,y,z, where
+$$
+\begin{cases}
+\begin{aligned}
+x &= 1 - 5z \\
+y &= -1 - 2z \\
+z &= z
+\end{aligned}
+\end{cases}
+\qquad \text{z any real number}
+$$
+
+This is called the parametric form for the solution to the linear system. The variable $z$ is called a free variable.
+
+**Definition**:Consider a consistent system of equations in the variables $x_1$,$x_2$,...,$x_n$.Let $A$ be a row echelon form of the augmented martrix for this system.
+We say that $x_1$ is a free variable if its corresponding column in $A$ is not a pivot column 主元列（A pivot column of a matrix is a column that contains a pivot position.）.
+
+#### Recipe: Parametric form
+The parametric form of the solution set of a consistent system of linear equations is obtained as follows.
+1. Write the system as an augmented matrix.
+2. Row reduce to reduced row echelon form.
+3. Write the corresponding (solved) system of linear equations.
+4. Move all free variables to the right hand side of the equations.
+
+#### Implicit Versus Parameterized Equations The solution set of the system of linear equations 隐式方程与参数化方程；线性方程组的解集
+$$
+\begin{cases}
+\begin{aligned}
+2x + y + 12z &= 1 \\
+x + 2y + 9z &= -1
+\end{aligned}
+\end{cases}
+$$
+is a line in $R^3$, as we saw in this . These equations are called the implicit equations for the line: the line is defined implicitly as the simultaneous solutions to those two equations.
+The parametric form  参数形式
+$$
+\begin{cases}
+\begin{aligned}
+x &= 1 - 5z \\
+x &= -1 - 2z.
+\end{aligned}
+\end{cases}
+$$
+can be written as follows:
+$$
+(x, y, z) = (1 - 5z, -1 - 2z, z) \qquad z \text{ any real number.}
+$$
+This called a parameterized equation for the same line. It is an expression that produces all points of the line in terms of one parameter, 
+$z$.
+
+One should think of a system of equations as being an implicit equation for its solution set, and of the parametric form as being the parameterized equation for the same set. The parameteric form is much more explicit: it gives a concrete recipe for producing all solutions.
+
+#### Number of Solutions  解的数量
+There are three possibilities for the reduced row echelon form of the augmented matrix of a linear system.线性方程组的增广矩阵的简化行阶梯形有三种可能性。
+1. **The last column is a pivot column.** In this case, the system is inconsistent. There are zero solutions, i.e., the solution set is empty. For example, the matrix
+$$
+\left(
+\begin{array}{cc|c}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{array}
+\right)
+$$
+comes from a linear system with no solutions.
+2. **Every column except the last column is a pivot column.** In this case, the system has a unique solution. For example, the matrix
+$$
+\left(
+\begin{array}{ccc|c}
+1 & 0 & 0 & a \\
+0 & 1 & 0 & b \\
+0 & 0 & 1 & c
+\end{array}
+\right)
+$$
+tells us that the unique solution is $(x,y,z) = (a,b,c)$.
+3. **The last column is not a pivot column, and some other column is not a pivot column either.** In this case, the system has infinitely many solutions, corresponding to the infinitely many possible values of the free variable(s). For example, in the system corresponding to the matrix
+$$
+\left(
+\begin{array}{cccc|c}
+1 & -2 & 0 & 3 & 1 \\
+0 & 0 & 1 & 4 & -1
+\end{array}
+\right)
+$$
+any values for $x_2$ and $x_4$ yield a solution to the system of equations.
